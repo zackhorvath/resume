@@ -11,8 +11,6 @@ before_script:
 
 stages:
   - build
-  - test
-  - cleanup
   - release
   - compile
 
@@ -23,21 +21,6 @@ build_job:
   script:
     - docker build -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
-
-test_job:
-  stage: test
-  services:
-    - docker:dind
-  script: docker run --name xetex-$CI_COMMIT_REF_NAME $CONTAINER_TEST_IMAGE xelatex help
-
-cleanup_job:
-  stage: cleanup
-  services:
-    - docker:dind
-  when: always
-  script:
-    - docker stop xetex-$CI_COMMIT_REF_NAME
-    - docker rm xetex-$CI_COMMIT_REF_NAME
 
 release_job:
   stage: release

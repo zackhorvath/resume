@@ -1,6 +1,8 @@
 # resume
 This repository contains my immutable resume that I created in LaTex using a modified open source LaTeX template. For privacy reasons, some personal information is redacted. A full version is available upon request.
 
+[![pipeline status](https://gitlab.com/zackhorvath/resume/badges/master/pipeline.svg)](https://gitlab.com/zackhorvath/resume/commits/master)
+
 ## FAQ
 ### How does this work?
 Code is uploaded to GitLab where it is run through a CI process that launches a LaTeX docker container that compiles my resume and generates a PDF!

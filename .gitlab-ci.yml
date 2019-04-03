@@ -1,7 +1,5 @@
 # This CI Configuration is responsible for creating an up-to-date XeTeX container, and compiling my resume.
 
-image: zackhorvath/resume:latest
-
 variables:
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
@@ -37,7 +35,7 @@ release_job:
 
 compile_job:
   stage: compile
-  image: zackhorvath/resume:latest
+  image: registry.gitlab.com/zackhorvath/resume:latest
   script:
     - xelatex resume_cv.tex
     - git add resume_cv.pdf

@@ -18,16 +18,22 @@ stages:
 
 build_job:
   stage: build
+  services:
+    - docker:dind
   script:
     - docker build -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
 
 test_job:
   stage: test
+  services:
+    - docker:dind
   script: docker run --name xetex-$CI_COMMIT_REF_NAME $CONTAINER_TEST_IMAGE xelatex help
 
 cleanup_job:
   stage: cleanup
+  services:
+    - docker:dind
   when: always
   script:
     - docker stop xetex-$CI_COMMIT_REF_NAME
@@ -35,6 +41,8 @@ cleanup_job:
 
 release_job:
   stage: release
+  services:
+    - docker:dind
   script:
     - docker pull $CONTAINER_TEST_IMAGE
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
@@ -44,6 +52,8 @@ release_job:
 
 compile_job:
   stage: compile
+  services:
+    - docker:dind
   script:
     - docker run --rm -v $(pwd):/data $CONTAINER_RELEASE_IMAGE xelatex resume_cv.tex
   artifacts:

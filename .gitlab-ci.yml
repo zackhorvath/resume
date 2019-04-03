@@ -37,8 +37,10 @@ compile_job:
   image: registry.gitlab.com/zackhorvath/resume:latest
   script:
     - xelatex resume_cv.tex
+    - git config --global user.email "$GIT_EMAIL"
+    - git config --global user.name "CI Pipeline"
     - git add resume_cv.pdf
-    - git commit -m "Resume PDF $CI_COMMIT_REF_SLUG"
+    - git commit -m "Resume $CI_COMMIT_REF_SLUG [skip ci]"
     - git push origin master
   artifacts:
     paths:

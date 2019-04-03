@@ -1,9 +1,53 @@
-# This file runs the build script for my resume.
-image: moss/xelatex
+# This CI Configuration is responsible for creating an up-to-date XeTeX container, and compiling my resume.
 
-build:
+image: docker:stable
+
+variables:
+  CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
+
+before_script:
+  - docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY
+
+stages:
+  - build
+  - test
+  - cleanup
+  - release
+  - compile
+
+build_job:
+  stage: build
   script:
-    - make pdf
+    - docker build -t $CONTAINER_TEST_IMAGE .
+    - docker push $CONTAINER_TEST_IMAGE
+
+test_job:
+  stage: test
+  script: docker run --name xetex-$CI_COMMIT_REF_NAME $CONTAINER_TEST_IMAGE xelatex help
+
+cleanup_job:
+  stage: cleanup
+  when: always
+  script:
+    - docker stop xetex-$CI_COMMIT_REF_NAME
+    - docker rm xetex-$CI_COMMIT_REF_NAME
+
+release_job:
+  stage: release
+  script:
+    - docker pull $CONTAINER_TEST_IMAGE
+    - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
+    - docker push $CONTAINER_RELEASE_IMAGE
+  only:
+    - master
+
+compile_job:
+  stage: compile
+  script:
+    - docker run --rm -v $(pwd):/data $CONTAINER_RELEASE_IMAGE xelatex resume_cv.tex
   artifacts:
     paths:
       - "*.pdf"
+  only:
+    - master

@@ -1,7 +1,7 @@
 # This is the Makefile that the xelatex container uses to generate the PDF of my resume.
 #
 
-filename=zhorvath_resume_redacted
+filename=resume_cv.tex
 
 pdf: 
 		xelatex ${filename}

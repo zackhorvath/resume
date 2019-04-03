@@ -21,6 +21,8 @@ build_job:
   script:
     - docker build -t $CONTAINER_TEST_IMAGE .
     - docker push $CONTAINER_TEST_IMAGE
+  only:
+    - docker
 
 release_job:
   stage: release
@@ -31,14 +33,13 @@ release_job:
     - docker tag $CONTAINER_TEST_IMAGE $CONTAINER_RELEASE_IMAGE
     - docker push $CONTAINER_RELEASE_IMAGE
   only:
-    - master
+    - docker
 
 compile_job:
   stage: compile
-  services:
-    - docker:dind
+  image: zackhorvath/resume:latest
   script:
-    - docker run --rm -v $(pwd):/data $CONTAINER_RELEASE_IMAGE xelatex resume_cv.tex
+    - xelatex resume_cv.tex
     - git add resume_cv.pdf
     - git commit -m "Resume PDF $CI_COMMIT_REF_SLUG"
     - git push

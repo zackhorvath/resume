@@ -39,6 +39,9 @@ compile_job:
     - docker:dind
   script:
     - docker run --rm -v $(pwd):/data $CONTAINER_RELEASE_IMAGE xelatex resume_cv.tex
+    - git add resume_cv.pdf
+    - git commit -m "Resume PDF $CI_COMMIT_REF_SLUG"
+    - git push
   artifacts:
     paths:
       - "*.pdf"

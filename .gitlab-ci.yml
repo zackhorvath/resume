@@ -41,7 +41,7 @@ compile_job:
     - git config --global user.name "$GITLAB_USERNAME"
     - git add resume_cv.pdf
     - git commit -m "Resume Branch $CI_COMMIT_REF_SLUG [skip ci]"
-    - git push https://${GITLAB_USERNAME}:${GITLAB_ACCESS_TOKEN}@gitlab.com/${GITLAB_USERNAME}/resume.git HEAD:$CI_COMMIT_REF_SLUG
+    - git push https://zackhorvath:${GITLAB_ACCESS_TOKEN}@gitlab.com/zackhorvath/resume.git HEAD:$CI_COMMIT_REF_SLUG
   artifacts:
     paths:
       - "*.pdf"

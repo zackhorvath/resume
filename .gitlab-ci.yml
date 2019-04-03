@@ -1,6 +1,6 @@
 # This CI Configuration is responsible for creating an up-to-date XeTeX container, and compiling my resume.
 
-image: docker:stable
+image: zackhorvath/resume:latest
 
 variables:
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
@@ -42,7 +42,7 @@ compile_job:
     - xelatex resume_cv.tex
     - git add resume_cv.pdf
     - git commit -m "Resume PDF $CI_COMMIT_REF_SLUG"
-    - git push
+    - git push origin master
   artifacts:
     paths:
       - "*.pdf"

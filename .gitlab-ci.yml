@@ -3,7 +3,7 @@ image: moss/xelatex
 
 build:
   script:
-    - make
+    - make pdf
   artifacts:
     paths:
       - "*.pdf"

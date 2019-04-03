@@ -20,5 +20,3 @@ I got bored one day and someone on Reddit mentioned that they were having issues
 
 ### Why put this in CI/CD?
 I wanted to put this online for everyone to see so hopefully someone else can learn from this exercise. LaTeX requires a compiler to generate a PDF version of your resume, and after dealing with weird TexWorks issues on Windows, I ended up using a Docker container for running the miktex compiler.
-
-The natural evolution of this, of course, is to use GitLab CI to create the immutable Resume!

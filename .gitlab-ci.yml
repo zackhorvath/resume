@@ -5,11 +5,12 @@ variables:
   CONTAINER_RELEASE_IMAGE: $CI_REGISTRY_IMAGE:latest
 
 stages:
-  - build
-  - release
-  - compile
+  - docker_build
+  - docker_release
+  - pdf_compile
+  - pdf_merge
 
-build_job:
+docker_build:
   stage: build
   services:
     - docker:dind
@@ -20,8 +21,8 @@ build_job:
   only:
     - docker
 
-release_job:
-  stage: release
+docker_release:
+  stage: docker_release
   services:
     - docker:dind
   script:
@@ -31,19 +32,28 @@ release_job:
     - docker push $CONTAINER_RELEASE_IMAGE
   only:
     - docker
-
-compile_job:
-  stage: compile
+  
+pdf_compile:
+  stage: pdf_compile
   image: registry.gitlab.com/zackhorvath/resume:latest
   script:
     - xelatex resume_cv.tex
-    - git config --global user.email "$GITLAB_USER_EMAIL"
-    - git config --global user.name "GitLab CI"
-    - git add resume_cv.pdf
-    - git commit -m "Importing Updated Resume [skip ci]"
-    - git push https://zackhorvath:${GITLAB_ACCESS_TOKEN}@gitlab.com/zackhorvath/resume.git HEAD:$CI_COMMIT_REF_SLUG
   artifacts:
     paths:
       - "*.pdf"
   only:
-    - master
+    - pdf-compile
+
+pdf_merge:
+  stage: pdf_merge
+  image: registry.gitlab.com/zackhorvath/resume:latest
+  script:
+    - git config --global user.email "$GITLAB_USER_EMAIL"
+    - git config --global user.name "GitLab CI"
+    - wget https://gitlab.com/zackhorvath/resume/-/jobs/artifacts/master/raw/resume_cv.pdf?job=pdf_compile
+    - git checkout master
+    - git merge pdf-compile 
+    - git commit -m "Automated Merge from $CI_COMMIT_REF_SLUG [skip ci]"
+    - git push https://zackhorvath:${GITLAB_ACCESS_TOKEN}@gitlab.com/zackhorvath/resume.git HEAD:Master
+  only:
+    - pdf-compile

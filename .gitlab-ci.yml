@@ -10,7 +10,6 @@ stages:
   - docker_build
   - docker_release
   - pdf_compile
-  - pdf_merge
 
 docker_build:
   stage: docker_build
@@ -40,21 +39,13 @@ pdf_compile:
   image: registry.gitlab.com/zackhorvath/resume:latest
   script:
     - xelatex resume_cv.tex
+    - git config --global user.email "$GITLAB_USER_EMAIL"
+    - git config --global user.name "GitLab CI"
+    - git checkout master
+    - git merge pdf-compile
+    - git push https://zackhorvath:${GITLAB_ACCESS_TOKEN}@gitlab.com/zackhorvath/resume.git origin/master
   artifacts:
     paths:
       - "*.pdf"
-  only:
-    - pdf-compile
-
-pdf_merge:
-  stage: pdf_merge
-  image: registry.gitlab.com/zackhorvath/resume:latest
-  script:
-    - git config --global user.email "$GITLAB_USER_EMAIL"
-    - git config --global user.name "GitLab CI"
-    - wget https://gitlab.com/zackhorvath/resume/-/jobs/artifacts/master/raw/resume_cv.pdf?job=pdf_compile
-    - git checkout master
-    - git merge pdf-compile 
-    - git push https://zackhorvath:${GITLAB_ACCESS_TOKEN}@gitlab.com/zackhorvath/resume.git origin/master
   only:
     - pdf-compile

@@ -38,9 +38,9 @@ compile_job:
   script:
     - xelatex resume_cv.tex
     - git config --global user.email "$GITLAB_USER_EMAIL"
-    - git config --global user.name "$GITLAB_USERNAME"
+    - git config --global user.name "GitLab CI"
     - git add resume_cv.pdf
-    - git commit -m "Resume Branch $CI_COMMIT_REF_SLUG [skip ci]"
+    - git commit -m "Committing Updated Resume to Repo [skip ci]"
     - git push https://zackhorvath:${GITLAB_ACCESS_TOKEN}@gitlab.com/zackhorvath/resume.git HEAD:$CI_COMMIT_REF_SLUG
   artifacts:
     paths:

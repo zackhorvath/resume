@@ -1,14 +1,15 @@
-# resume
-This repository contains my "immutable" resume that I created in LaTex using a modified open source XeTeX template. For privacy reasons, some personal information is redacted. A full version is available upon request.
+# Resume
+This repository contains my "immutable" resume that I created using a modified open source XeTeX template. For privacy reasons, some personal information is redacted. A full version is available upon request.
 
 [![pipeline status](https://gitlab.com/zackhorvath/resume/badges/master/pipeline.svg)](https://gitlab.com/zackhorvath/resume/commits/master)
 
+[Resume Download](resume_cv.pdf)
+
+### Repository Links
 - [GitHub Repository](https://github.com/zackhorvath/resume)
 - [GitLab Repository](https://gitlab.com/zackhorvath/resume)
 
 ## ToDo
-- Break Master into multiple branches, one for compiling XeTeX and one for the Docker container.
-- Modify CI stages to reflect multiple branches above.
 - Create TeX to HTML makefile to publish Resume to GitLab pages so it can be displayed inline.
 
 ## FAQ

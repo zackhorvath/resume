@@ -1,5 +1,4 @@
 # The Immuatable Resume
-[![pipeline status](https://gitlab.com/zackhorvath/resume/badges/master/pipeline.svg)](https://gitlab.com/zackhorvath/resume/commits/pdf-compile)
 This repository contains my "immutable" resume that I created using a modified open source XeTeX template. There are two branches and a master branch, with GitLab-Ci jobs that kick off depending on the branch edited.
 
 For privacy reasons, some personal information is redacted. A full version is available upon request.

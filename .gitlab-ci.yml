@@ -41,11 +41,11 @@ pdf_compile:
     - xelatex resume_cv.tex
     - git config --global user.email "$GITLAB_USER_EMAIL"
     - git config --global user.name "GitLab CI"
-    - git checkout master
-    - git merge origin/pdf-compile
-    - git push https://zackhorvath:${GITLAB_ACCESS_TOKEN}@gitlab.com/zackhorvath/resume.git origin/master
+    - git add resume_cv.pdf
+    - git commit -m "Committing Updated Resume [skip ci]"
+    - git push https://zackhorvath:${GITLAB_ACCESS_TOKEN}@gitlab.com/zackhorvath/resume.git HEAD:Master
   artifacts:
     paths:
       - "*.pdf"
   only:
-    - pdf-compile
+    - master

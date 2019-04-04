@@ -11,7 +11,7 @@ stages:
   - pdf_merge
 
 docker_build:
-  stage: build
+  stage: docker_build
   services:
     - docker:dind
   script:

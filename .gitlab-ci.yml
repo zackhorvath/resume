@@ -42,7 +42,7 @@ pdf_compile:
     - git config --global user.email "$GITLAB_USER_EMAIL"
     - git config --global user.name "GitLab CI"
     - git checkout master
-    - git merge pdf-compile
+    - git merge origin/pdf-compile
     - git push https://zackhorvath:${GITLAB_ACCESS_TOKEN}@gitlab.com/zackhorvath/resume.git origin/master
   artifacts:
     paths:

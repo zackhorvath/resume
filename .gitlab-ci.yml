@@ -42,8 +42,8 @@ pdf_compile:
     - git config --global user.email "$GITLAB_USER_EMAIL"
     - git config --global user.name "GitLab CI"
     - git add resume_cv.pdf
-    - git commit -m "Committing Updated Resume [skip ci]"
-    - git push https://zackhorvath:${GITLAB_ACCESS_TOKEN}@gitlab.com/zackhorvath/resume.git HEAD:Master
+    - git commit -m "Committing Updated Resume to $CI_COMMIT_REF_SLUG [skip ci]"
+    - git push https://zackhorvath:${GITLAB_ACCESS_TOKEN}@gitlab.com/zackhorvath/resume.git HEAD:$CI_COMMIT_REF_SLUG
   artifacts:
     paths:
       - "*.pdf"

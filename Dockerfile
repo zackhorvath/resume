@@ -9,6 +9,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt update && apt install --yes \
   git \
   ca-certificates \
+  wget \
   inotify-tools \
   lmodern \
   make \

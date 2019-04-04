@@ -1,4 +1,6 @@
 # This CI Configuration is responsible for creating an up-to-date XeTeX container, and compiling my resume.
+#
+image: docker:stable
 
 variables:
   CONTAINER_TEST_IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG

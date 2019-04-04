@@ -1,15 +1,23 @@
 # The Immuatable Resume
-This repository contains my "immutable" resume that I created using a modified open source XeTeX template. For privacy reasons, some personal information is redacted. A full version is available upon request.
+[![pipeline status](https://gitlab.com/zackhorvath/resume/badges/master/pipeline.svg)](https://gitlab.com/zackhorvath/resume/commits/pdf-compile)
+This repository contains my "immutable" resume that I created using a modified open source XeTeX template. There are two branches and a master branch, with GitLab-Ci jobs that kick off depending on the branch edited.
+
+For privacy reasons, some personal information is redacted. A full version is available upon request.
 
 [Resume](resume_cv.pdf)
 
+### Branch Information
+- docker: This branch creates a XeTex Docker container leveraging a [Dockerfile](Dockerfile) to customize an Ubuntu 18.04 container with XeTex dependencies, as well as some handy packages. Upon success, GitLab CI will tag the container as latest.
+- pdf-compile: When this branch is updated it downloads the latest Docker container from the 'docker' branch, compiles the .tex files into a PDF, and then publishes that PDF to the master branch.
+
 ### Repository Links
-[![pipeline status](https://gitlab.com/zackhorvath/resume/badges/master/pipeline.svg)](https://gitlab.com/zackhorvath/resume/commits/pdf-compile)
 - [GitHub Repository](https://github.com/zackhorvath/resume)
 - [GitLab Repository](https://gitlab.com/zackhorvath/resume)
 
 ## ToDo
 - Create TeX to HTML makefile to publish Resume to GitLab pages so it can be displayed inline.
+- Create a test system for the docker pipeline to verify that xelatex works properly.
+- Create a pipeline so when the docker pipeline succeeds it automatically starts the pdf-compile pipeline.
 
 ## FAQ
 ### How does this work?

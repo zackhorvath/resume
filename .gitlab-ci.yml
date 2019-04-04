@@ -53,7 +53,6 @@ pdf_merge:
     - wget https://gitlab.com/zackhorvath/resume/-/jobs/artifacts/master/raw/resume_cv.pdf?job=pdf_compile
     - git checkout master
     - git merge pdf-compile 
-    - git commit -m "Automated Merge from $CI_COMMIT_REF_SLUG [skip ci]"
-    - git push https://zackhorvath:${GITLAB_ACCESS_TOKEN}@gitlab.com/zackhorvath/resume.git HEAD:Master
+    - git push https://zackhorvath:${GITLAB_ACCESS_TOKEN}@gitlab.com/zackhorvath/resume.git origin/master
   only:
     - pdf-compile

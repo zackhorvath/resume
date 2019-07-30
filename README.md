@@ -1,6 +1,4 @@
-# Zack's Immuatable Resume
-Hello There!
-
+# Zack's LaTeX Resume
 This repository contains my "immutable" resume that I created using a modified open source XeTeX template.
 
 For privacy reasons, some personal information is redacted. A full version is available upon request.
@@ -16,9 +14,10 @@ For privacy reasons, some personal information is redacted. A full version is av
 - [GitLab Repository](https://gitlab.com/zackhorvath/resume)
 
 ## ToDo
-- Create TeX to HTML makefile to publish Resume to GitLab pages so it can be displayed inline.
-- Create a test system for the docker pipeline to verify that xelatex works properly.
-- Move pdf compilation off master branch in a way that allows merging artifacts from a pdf-compile branch.
+- Implement [TeXtidote](https://github.com/sylvainhalle/textidote) to perform syntax, spelling, and grammar validation. Will generate html reports as artifacts.
+- Create TeX to HTML makefile to publish Resume to GitLab pages so it can be displayed inline. This avoids the weird PDF render issues that Google Chrome has.
+- Create a test system for the docker pipeline to verify that xelatex works properly. This would run various smoke tests to ensure that `docker` branch runs do what they need to do.
+- Move pdf compilation off master branch in a way that allows merging artifacts from a pdf-compile branch. This avoids the messy "commit back to master" job I have set up.
 
 ## FAQ
 ### How does this work?

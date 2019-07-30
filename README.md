@@ -11,7 +11,6 @@ For privacy reasons, some personal information is redacted. A full version is av
 
 ### Repository Links
 - [GitHub Repository](https://github.com/zackhorvath/resume)
-- [GitLab Repository](https://gitlab.com/zackhorvath/resume)
 
 ## ToDo
 - Implement [TeXtidote](https://github.com/sylvainhalle/textidote) to perform syntax, spelling, and grammar validation. Will generate html reports as artifacts.
@@ -27,4 +26,4 @@ Think of my [resume_cv.tex](resume_cv.tex) file as a lego set, which imports bui
 I was crawling Reddit and came across another user who mentioned that they were having issues writing a technical document in LaTex. Intrigued, I looked for a good use case to experiment with it, and came across a sweet template that someone else had made. From there, I reverse engineered the styling documents to understand how the code worked, and modified it for my own uses.
 
 ### Why put this in CI/CD?
-I wanted to put this online not only as an exercise for myself, but also for everyone to see, and hopefully learn from!
+I wanted to put this online not only as an exercise for myself, but also for everyone to see, and hopefully learn from! This is especially great because I can make changes to this "code base" without needing to be on a computer that has TeX libraries, or Docker, installed.

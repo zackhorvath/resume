@@ -39,10 +39,12 @@ pdf_compile:
   image: registry.gitlab.com/zackhorvath/resume:latest
   script:
     - xelatex resume_cv.tex
+    - xelatex coverletter_cv.tex
     - git config --global user.email "$GITLAB_USER_EMAIL"
     - git config --global user.name "GitLab CI"
-    - git add resume_cv.pdf
-    - git commit -m "Committing Updated Resume to $CI_COMMIT_REF_SLUG [skip ci]"
+    - git add -f resume_cv.pdf
+    - git add -f coverletter_cv.pdf
+    - git commit -m "Committing Updated CV to $CI_COMMIT_REF_SLUG [skip ci]"
     - git push https://zackhorvath:${GITLAB_ACCESS_TOKEN}@gitlab.com/zackhorvath/resume.git HEAD:$CI_COMMIT_REF_SLUG
   artifacts:
     paths:
